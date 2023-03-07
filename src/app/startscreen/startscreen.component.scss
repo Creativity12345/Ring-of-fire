@@ -1,0 +1,76 @@
+.start-screen {
+    background-image: url(../../assets/img/startscreen.jpg);
+    background-position-x: center;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 960px) {
+        overflow: hidden;
+        width: 100%;
+    }
+}
+
+.start-box {
+    position: relative;
+    height: 100vh;
+
+    @media (max-width: 960px) {
+        overflow: hidden;
+    }
+}
+
+.title{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 260px;
+    bottom: 0;
+    margin: 0 auto;
+    z-index: 1;
+    width: 450px;
+
+    @media (max-width: 960px) {
+        width: 300px;
+        top: 300px;
+    }
+}
+
+.start-button {
+    position: absolute;
+    left: 80px;
+    right: 0;
+    bottom: 50px;
+    margin: 0 auto;
+    transform: scale(1);
+	animation: pulse 2s infinite;
+    z-index: 1;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.5);
+    }
+
+    @media (max-width: 960px) {
+        width: 270px;
+        left: 50px;
+        bottom: 80px;
+    }
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+	}
+
+	70% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(0.95);
+	}
+}

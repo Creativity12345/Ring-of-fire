@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ring-of-fire-d5618": {
+      "hosting": {
+        "Ring-of-fire": [
+          "ring-of-fire-d5618"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ring-of-fire-d5618"
+  }
+}
