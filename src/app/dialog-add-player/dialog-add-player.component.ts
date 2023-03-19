@@ -8,10 +8,22 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogAddPlayerComponent {
   name: string = '';
+  public images = [
+    {
+      img: 'assets/img/player/female.png',
+    },
+    {
+      img: 'assets/img/player/male.png',
+    },
+  ];
 
   constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>,) { }
 
   onNoClick() {
     this.dialogRef.close();
+  }
+
+  setSelectedImageId(imageId){
+    console.log('works', imageId);
   }
 }
