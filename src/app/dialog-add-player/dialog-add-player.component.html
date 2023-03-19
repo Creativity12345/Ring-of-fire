@@ -9,8 +9,7 @@
 
 <div class="images-container">
     <div class="cont-checkbox" *ngFor="let image of images; index as i">
-        <input type="radio" [id]="'myCheckbox-' + i" [name]="'myCheckbox'"
-            (click)="setSelectedImageId(image.img)" />
+        <input type="radio" [id]="'myCheckbox-' + i" [name]="'myCheckbox'" (click)="setSelectedImage(image.img)" />
         <label [for]="'myCheckbox-' + i">
             <img [src]="image.img" />
             <span class="cover-checkbox">
@@ -21,6 +20,7 @@
         </label>
     </div>
 </div>
+
 
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>

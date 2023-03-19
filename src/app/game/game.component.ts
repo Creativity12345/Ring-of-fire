@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
@@ -15,14 +15,14 @@ export class GameComponent implements OnInit {
   game: Game;
   gameId: string;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame();
-    this.route.params.subscribe((params)=>{
+    this.route.params.subscribe((params) => {
       this.gameId = params['id'];
 
-      this.firestore.collection('games').doc(this.gameId).valueChanges().subscribe((game:any) => {
+      this.firestore.collection('games').doc(this.gameId).valueChanges().subscribe((game: any) => {
         this.game.currentPlayer = game.currentPlayer;
         this.game.playedCards = game.playedCards;
         this.game.players = game.players;
@@ -41,12 +41,12 @@ export class GameComponent implements OnInit {
     if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop();
       this.game.pickCardAnimation = true;
-      
+
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      
+
       this.saveGame();
-      
+
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
         this.game.pickCardAnimation = false;
@@ -56,17 +56,33 @@ export class GameComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
+      data: {
+        selectedImage: null,
+      },
+    });
 
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
-        this.game.players.push(name);
+        this.game.players.push({
+          name: name,
+          image: dialogRef.componentInstance.selectedImage,
+        });
         this.saveGame();
       }
     });
   }
 
-  saveGame(){
-    this.firestore.collection('games').doc(this.gameId).update(this.game.toJSON());
+
+  saveGame() {
+    const gameData = this.game.toJSON();
+    gameData.players = gameData.players.map(player => {
+      return {
+        name: player.name,
+        image: player.image,   
+      }
+    });
+    this.firestore.collection('games').doc(this.gameId).update(gameData);
   }
+
 }

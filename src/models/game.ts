@@ -1,5 +1,5 @@
 export class Game {
-    public players: string[] = [];
+    public players: { name: string, image: string }[] = [];
     public stack: string[] = [];
     public playedCards: string[] = [];
     public currentPlayer: number = 0;
@@ -29,7 +29,6 @@ export class Game {
     }
 }
 
-
 function shuffle(array: any[]): any[] {
     let currentIndex = array.length;
     let temporaryValue;
@@ -46,4 +45,4 @@ function shuffle(array: any[]): any[] {
     }
   
     return array;
-  }
+}

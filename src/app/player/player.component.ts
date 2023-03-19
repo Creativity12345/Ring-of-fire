@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PlayerComponent {
 
-  @Input() name;
+  @Input() player;
   @Input() playerActive: boolean = false;
 
 }

@@ -8,12 +8,13 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogAddPlayerComponent {
   name: string = '';
+  selectedImage: string;
   public images = [
     {
-      img: 'assets/img/player/female.png',
+      img: '../../assets/img/player/female.png',
     },
     {
-      img: 'assets/img/player/male.png',
+      img: '../../assets/img/player/male.png',
     },
   ];
 
@@ -23,7 +24,7 @@ export class DialogAddPlayerComponent {
     this.dialogRef.close();
   }
 
-  setSelectedImageId(imageId){
-    console.log('works', imageId);
-  }
+  setSelectedImage(image: string) {
+    this.selectedImage = image;
+  }  
 }
